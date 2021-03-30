@@ -1,0 +1,42 @@
+version: '3'
+services:
+  app:
+    build: .
+    volumes:
+      - ".:/src"
+      - /src/node_mosules
+    ports:
+      - "5000:5000"
+    links:
+      - db
+    env_file:
+      - .env
+    depends_on:
+      - db
+    tty: true
+  db:
+    image: mysql:5.7.27
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    restart: always
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./.data/db:/var/lib/mysql
+      - ./.data/my.cnf:/etc/mysql/conf.d/my.cnf
+    environment:
+      MYSQL_ROOT_PASSWORD: root #必須項目
+      MYSQL_DATABASE: myproject_db
+      MYSQL_USER: test
+      MYSQL_PASSWORD: test
+
+# コンテナ立ち上げ
+# docker-compose up -d
+
+# mysqlサーバに入る
+# docker exec -it myproject_mysql /bin/bash
+# mysqlにrootユーザでログイン
+# mysql -h localhost -P 3307 -u root -p
+# パスワード「root」
+
+# testユーザの確認
+# select user,host from mysql.user;

@@ -1,0 +1,31 @@
+{
+  "name": "node_app",
+  "version": "1.0.0",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "client": "yarn workspace client",
+    "server": "yarn workspace server",
+    "dev:client": "yarn client dev",
+    "dev:server": "yarn server app:start",
+    "down": "yarn server app:down"
+  },
+  "workspaces": {
+    "packages": [
+      "./*"
+    ],
+    "nohoist": [
+      "**/ress"
+    ]
+  },
+  "lint-staged": {
+    "./client/src/**/*.{ts,tsx}": [
+      "eslint './client/src/**/*.{js,jsx,ts,tsx}' --fix"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  }
+}
