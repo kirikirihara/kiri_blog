@@ -1,5 +1,6 @@
 import express from 'express'
 import { connection } from 'dbConnection'
+const bodyParser = require('body-parser')
 
 export const app = express()
 const port = 5000
@@ -14,10 +15,22 @@ if (process.env.MODE === 'development') {
   })
 }
 
+//  bodyParserを使う
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  }),
+)
+app.use(bodyParser.json())
+
 app.get('/', (req, res) => {
   connection.query('SELECT * FROM articles;', (error, results) => {
     res.json(results)
   })
+})
+
+app.post('/create', (req, res) => {
+  res.json({ message: req.body })
 })
 
 app.get('/inu', (req, res) => {
