@@ -15,7 +15,7 @@ services:
       - db
     tty: true
   db:
-    image: mysql:5.7.27
+    image:  mariadb
     command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     restart: always
     ports:
@@ -33,10 +33,11 @@ services:
 # docker-compose up -d
 
 # mysqlサーバに入る
-# docker exec -it myproject_mysql /bin/bash
+# docker exec -it server_db_1 /bin/bash
 # mysqlにrootユーザでログイン
 # mysql -h localhost -P 3307 -u root -p
 # パスワード「root」
+# use myproject_db;
 
 # testユーザの確認
 # select user,host from mysql.user;

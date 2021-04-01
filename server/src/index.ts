@@ -1,16 +1,5 @@
 import express from 'express'
-// import { connection } from 'dbConnection'
-import mysql from 'mysql'
-
-const { DATABASE_NAME, DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_PORT } = process.env
-
-const connection = mysql.createConnection({
-  host: DATABASE_HOST,
-  port: Number(DATABASE_PORT),
-  user: DATABASE_USER,
-  password: DATABASE_PASSWORD,
-  database: DATABASE_NAME,
-})
+import { connection } from 'dbConnection'
 
 export const app = express()
 const port = 5000
@@ -26,11 +15,8 @@ if (process.env.MODE === 'development') {
 }
 
 app.get('/', (req, res) => {
-  connection.query('SELECT * FROM user;', (error, results) => {
-    res.json({
-      message: results,
-      status: connection.state,
-    })
+  connection.query('SELECT * FROM articles;', (error, results) => {
+    res.json(results)
   })
 })
 

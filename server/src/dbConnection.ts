@@ -9,11 +9,3 @@ export const connection = mysql.createConnection({
   password: DATABASE_PASSWORD,
   database: DATABASE_NAME,
 })
-
-connection.connect((err) => {
-  if (err) {
-    console.log('error connecting: ' + err.stack)
-    return
-  }
-  console.log('success')
-})

@@ -18,10 +18,26 @@ APIサーバ上で行う処理を開発します。Node.js(TypeScript)を用い�
 
 
 ## サーバー起動
+#### クライアント
 ```
-$ yarn dev
+$ yarn dev:client
 ```
+→ http://localhost:3000 にクライアントのサーバーが起動し、アプリが表示されます。
 
-http://localhost:3000 にクライアントのサーバーが起動し、アプリが表示されます。
+サーバーの停止
+
+ターミナル上で `control + C`
+
+
+#### サーバー (API + DB)
+```
+$ yarn dev:server
+```
 
 http://localhost:5000 にバックエンドのサーバーが起動し、APIが動きます。
+
+サーバーの停止
+
+```
+$ yarn down
+```
